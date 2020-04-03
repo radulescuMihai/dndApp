@@ -1,0 +1,9 @@
+.dice {
+    width: 30px;
+    height: 30px;
+}
+
+.horizontal {
+    display: flex;
+    justify-content: space-between;
+}
