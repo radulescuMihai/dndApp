@@ -1,9 +1,37 @@
+#wrapper{
+    width: 560px;
+    height: 800px;
+    overflow: hidden;
+    justify-content: center; 
+}
+
+table {
+    width: 95%;
+  }
+
 .dice {
     width: 30px;
     height: 30px;
 }
 
 .horizontal {
+    width: 560px;
+    height: 70px;
     display: flex;
-    justify-content: space-between;
+    background-color: lightgray;
+    /* justify-content: space-between; */
+}
+
+.tab{
+    width: 120px;
+    margin: 10px;;
+}
+
+.main-table{
+    width: 560px;
+}
+
+.mat-column-result{
+    flex: 0 10%;
+    margin-right: 10px;
 }

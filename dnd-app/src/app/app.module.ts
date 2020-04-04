@@ -8,7 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   exports: [
@@ -16,6 +19,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatTableModule,
     MatCardModule,
     MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   declarations: [
     AppComponent,
@@ -29,6 +34,11 @@ import {MatSelectModule} from '@angular/material/select';
     MatCardModule,
     MatButtonModule,
     MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
