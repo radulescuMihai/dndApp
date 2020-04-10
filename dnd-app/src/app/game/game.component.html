@@ -1,17 +1,18 @@
 <div id="wrapper">
     <table id="controlTable">
         <TR>
-            <TD> D&D SESION</TD>
+            <TD> D&D SESION 
+            </TD>
         </TR>
         <TR>
             <TD>
-                <button mat-button (click)="addDice(4);">d4</button>
-                <button mat-button (click)="addDice(6);">d6</button>
-                <button mat-button (click)="addDice(8);">d8</button>
-                <button mat-button (click)="addDice(10);">d10</button>
-                <button mat-button (click)="addDice(12);">d12</button>
-                <button mat-button (click)="addDice(20);">d20</button>
-                <button mat-button (click)="addDice(100);">d100</button>
+                <button mat-raised-button (click)="addDice(4);">d4</button>
+                <button mat-raised-button (click)="addDice(6);">d6</button>
+                <button mat-raised-button (click)="addDice(8);">d8</button>
+                <button mat-raised-button (click)="addDice(10);">d10</button>
+                <button mat-raised-button (click)="addDice(12);">d12</button>
+                <button mat-raised-button (click)="addDice(20);">d20</button>
+                <button mat-raised-button (click)="addDice(100);">d100</button>
             </TD>
         </TR>
         <TR>
@@ -31,12 +32,9 @@
 
         <TR>
             <TD>
-                <!-- Name: -->
                 <mat-form-field class="tab">
                     <input matInput  type="text" placeholder="Name" #name [formControl]="formNameControl">
                 </mat-form-field>
-
-                <button mat-raised-button (click)="roll()">ROLL!</button>
 
                 <mat-form-field class="tab">
                     <mat-select placeholder="Select Action" [formControl]="formActionControl">
@@ -49,6 +47,9 @@
                 <mat-form-field class="tab">
                     <input matInput  type="text" placeholder="Comment" #comment [formControl]="formCommentControl">
                 </mat-form-field>
+
+                <button mat-raised-button (click)="roll()">ROLL!</button>
+                <button mat-raised-button (click)="reLoad()"><mat-icon>refresh</mat-icon></button>
             </TD>
         </TR>
     </table>
@@ -74,27 +75,28 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     </mat-table>
 
+    <div style="overflow-y:auto; height: 400px;">
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8 main-table" *ngIf = " resultsList && resultsList.length >0; else emptyTableDiv">
 
         <ng-container matColumnDef="player">
-            <mat-cell *matCellDef="let actiune"> {{actiune.user}} </mat-cell>
+            <mat-cell *matCellDef="let tura"> {{tura.user}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="result">
-            <mat-cell *matCellDef="let actiune"> {{actiune.rollResults}} </mat-cell>
+            <mat-cell *matCellDef="let tura"> {{tura.roll}} </mat-cell>s
         </ng-container>
 
         <ng-container matColumnDef="action">
-            <mat-cell *matCellDef="let actiune"> {{actiune.action}} </mat-cell>
+            <mat-cell *matCellDef="let tura"> {{tura.action}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="comment">
-            <mat-cell *matCellDef="let actiune"> {{actiune.comment}} </mat-cell>
+            <mat-cell *matCellDef="let tura"> {{tura.comment}} </mat-cell>
         </ng-container>
 
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
-
+</div>
 </div>
 <ng-template #emptyTableDiv>
     <div style="height: 3em; width:100%; background-color: gray;"></div>

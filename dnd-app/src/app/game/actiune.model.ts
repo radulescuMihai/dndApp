@@ -1,6 +1,7 @@
-export class Action{
+export class Turn{
+    id:number;
     user:string;
-    rollResults:string;
+    roll:string;
     action:string;
     comment:string;
 

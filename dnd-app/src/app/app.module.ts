@@ -10,8 +10,11 @@ import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GameService } from './game/game.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   exports: [
@@ -35,12 +38,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatSelectModule,
     MatInputModule,
+    MatIconModule,
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
 
   ],
-  providers: [],
+  providers: [GameService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,7 @@
 #wrapper{
     width: 560px;
-    height: 800px;
-    overflow: hidden;
-    justify-content: center; 
+    margin-left: 15vw;
+    margin-right: 15vw;
 }
 
 table {

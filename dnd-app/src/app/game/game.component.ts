@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Action } from './actiune.model'
+import { Turn } from './actiune.model'
 import { Dice } from './dice.model'
-import {  DataSource } from "@angular/cdk/collections";
+import { DataSource } from "@angular/cdk/collections";
 import { Observable, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { GameService } from './game.service';
 
 @Component({
   selector: 'app-game',
@@ -15,24 +16,27 @@ export class GameComponent implements OnInit {
   displayedColumns: string[] = ['player', 'result', 'action', 'comment'];
   dataSource: GameDataSource;
 
-  resultsList: Action[] = [];
+  resultsList: Turn[] = [];
 
   dices: Dice[] = [];
   selectedDices: Dice[] = [];
 
-  actionList: string[] = ['Attack', 'Cast Spell', 'Dodge', 'Saving Throw', 'Ability Check'];
+  actionList: string[] = ['Attack', 'Cast Spell', 'Dodge', 'Saving Throw', 'Ability Check', 'Take Damege', 'Heal'];
 
-  formNameControl = new FormControl ();
-  formActionControl = new FormControl ();
-  formCommentControl = new FormControl ();
+  formNameControl = new FormControl();
+  formActionControl = new FormControl();
+  formCommentControl = new FormControl();
 
-  constructor() { }
+  constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
+    this.gameService.getAllTurns().subscribe(turnList => {
+      this.resultsList = turnList;
+      this.refresh();
+    });
   }
 
-  refresh(){
-    console.log(this.resultsList)
+  refresh() {
     this.dataSource = new GameDataSource(this.resultsList);
   }
 
@@ -46,42 +50,51 @@ export class GameComponent implements OnInit {
   }
 
   roll(): void {
-    let result:string = "";
+    let rollResult: string = "";
     let roll: number = 0;
     let total: number = 0;
-    for (let d of this.selectedDices){
-      console.log(d);
-
+    for (let d of this.selectedDices) {
       roll = d.roll();
       total += roll;
-      result += d.title +": "+ roll +"\n";
+      rollResult += d.title + ": " + roll + "\n";
     }
-    result += "Total: " + total;
-    let action = new Action();
-    action.user = this.formNameControl.value
-    action.rollResults = result;
-    action.action = this.formActionControl.value;
-    action.comment = this.formCommentControl.value
+    rollResult += "Total: " + total;
+    let turnResult = new Turn();
+    turnResult.user = this.formNameControl.value
+    turnResult.roll = rollResult;
+    turnResult.action = this.formActionControl.value;
+    turnResult.comment = this.formCommentControl.value
 
-    console.log(result);
+    console.log("Sending turn tu backend...")
+    this.gameService.create(turnResult).subscribe( turn =>{
+      console.log("Sent succesfully!")
 
-    this.resultsList.push(action);
-    this.refresh();
+      this.resultsList.unshift(turn);
+      this.refresh();
+    })
+    // this.reLoad();
+   
+
+  }
+
+  reLoad() {
+    this.gameService.getAllTurns().subscribe(turnList => {
+      this.resultsList = turnList;
+      this.refresh();
+    });
   }
 
 }
 
 export class GameDataSource extends DataSource<any>{
 
-  constructor(public actions: Action[]){
+  constructor(public actions: Turn[]) {
     super();
   }
 
   connect(): Observable<any[]> {
     return of(this.actions);
   }
-
-
 
   disconnect() { }
 }
