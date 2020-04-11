@@ -14,29 +14,29 @@ export class CharacterService {
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   private acceptJsonHttpHeaders = new HttpHeaders({ 'Accept': 'application/json' });
-  private backendUrl = 'http://86.126.16.228:8080';
+  private backendUrl = 'http://86.126.16.228:8080/char';
   
   constructor(private httpClient: HttpClient) { }
 
   getAllCharacters(user:User): Observable<Character[]> {
-    return this.httpClient.get(`${this.backendUrl}/${user.name}/chars`,
+    return this.httpClient.get(`${this.backendUrl}/${user.name}`,
       { headers: this.acceptJsonHttpHeaders })
       .pipe(
         map(response => response as Character[]),
         catchError(this.handleError));
   }
 
-  getCharacter(charname:string, user:User): Observable<Character[]> {
-    return this.httpClient.get(`${this.backendUrl}/char/${user.name}/${charname}`,
-      { headers: this.acceptJsonHttpHeaders })
-      .pipe(
-        map(response => response as Character[]),
-        catchError(this.handleError));
-  }
+  // getCharacter(charname:string, user:User): Observable<Character[]> {
+  //   return this.httpClient.get(`${this.backendUrl}/char/${user.name}/${charname}`,
+  //     { headers: this.acceptJsonHttpHeaders })
+  //     .pipe(
+  //       map(response => response as Character[]),
+  //       catchError(this.handleError));
+  // }
 
   create(user: Character): Observable<Character> {
     return this.httpClient
-      .post(`${this.backendUrl}/char`, JSON.stringify(user),
+      .post(`${this.backendUrl}`, JSON.stringify(user),
         { headers: this.httpHeaders })
       .pipe(
         map(response => response as Character),
@@ -45,7 +45,7 @@ export class CharacterService {
 
   update(char: Character): Observable<Character> {
     return this.httpClient
-      .put(`${this.backendUrl}/char`, JSON.stringify(char)
+      .put(`${this.backendUrl}`, JSON.stringify(char)
         , { headers: this.httpHeaders })
       .pipe(
         map(response => response as Character),
@@ -53,7 +53,7 @@ export class CharacterService {
   }
 
   delete(char: Character): Observable<void> {
-    let url = this.backendUrl+"/char/"+char.name;
+    let url = this.backendUrl+"/"+char.name;
     return this.httpClient.delete(`${url}`,
       { headers: this.httpHeaders })
       .pipe(

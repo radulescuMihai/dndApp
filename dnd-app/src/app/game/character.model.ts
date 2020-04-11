@@ -9,9 +9,10 @@ export class Character{
     initiative:number;
     speed:number;
     prof:number;
-    hpDice:number;
+    hpDiceNr:number;
+    hpDicesLeft:number;
 
-    player:User;
+    user:User;
     race:string;
     class:string;
     lvl:number;
