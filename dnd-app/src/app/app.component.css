@@ -1,3 +1,14 @@
 h1{
     text-align-last: center;
 }
+
+.wrapper{
+    width: 560px;
+    /* overflow-x: auto; */
+    margin-left: 30vw;
+    margin-right: 15vw;
+}
+
+#sesion{
+    display: none;
+}

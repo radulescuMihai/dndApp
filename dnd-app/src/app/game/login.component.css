@@ -1,0 +1,24 @@
+#login{
+    display: block;
+}
+
+#newuser{
+    display: none;
+}
+
+#welcome{
+    display: none;
+    width: 560px;
+}
+
+#selChar{
+    display: none;
+}
+
+#sesion{
+    display: none;
+}
+
+#log{
+    width: 250px;
+}

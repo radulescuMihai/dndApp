@@ -10,5 +10,5 @@ import com.example.DndBackend.Model.Turn;
 
 public interface TurnRepository extends CrudRepository<Turn, Integer> {
 	
-	public List<Turn> findAll();
+	public List<Turn> findAllByOrderByIdDesc();
 }

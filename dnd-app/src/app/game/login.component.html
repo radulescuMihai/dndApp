@@ -1,0 +1,25 @@
+<table>
+    <tr id="login">
+        <td>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Username" [formControl]="formNewUserControl">
+            </mat-form-field>
+        </td>
+        <td>
+            <button mat-raised-button (click)="logIn()">Log in!</button>
+            <button mat-raised-button (click)="signUp()">Sign Up!</button>
+        </td>
+    </tr>
+
+    <tr id="welcome">
+        <td>
+            <h2 style="width: 280px;">
+                Welcome: {{loggedUser}}
+            </h2>
+        </td>
+        <td style="width: 280px;">
+            <button mat-raised-button (click)="signOut()" style=" margin-left: 175px;">Sign Out!</button>
+        </td>
+    </tr>
+
+</table>

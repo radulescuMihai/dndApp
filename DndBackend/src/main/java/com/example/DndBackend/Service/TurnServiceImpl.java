@@ -20,12 +20,12 @@ public class TurnServiceImpl implements TurnService {
 	public List<Turn> getTurns(){
 		if(turnRepo == null)
 			System.out.println("\n Repo autowired failed! \n");
-		return turnRepo.findAll();
+		return turnRepo.findAllByOrderByIdDesc();
 //		return new ArrayList<Turn>();
 	}
 
 	@Override
-	public void addUser(Turn turn){
+	public void addTurn(Turn turn){
 		turnRepo.save(turn);
 	}
 	

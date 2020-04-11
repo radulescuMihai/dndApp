@@ -1,4 +1,27 @@
-<div id="wrapper">
+
+    <table id = "selChar">
+        <tr>
+            <td>
+                Select Character
+            </td>
+            
+            <td>
+                <mat-form-field>                
+                     <mat-select placeholder="Select Character" [formControl]="formCharControl">
+
+                        <mat-option *ngFor="let char of characterList" [value]="char">
+                            {{char}}
+                        </mat-option>
+                    </mat-select> 
+                </mat-form-field>
+            </td>
+
+            <td>
+                <button mat-raised-button (click)="newChar()">Create character</button>
+            </td>
+        </tr>
+        
+    </table>
     <table id="controlTable">
         <TR>
             <TD> D&D SESION 
@@ -33,7 +56,7 @@
         <TR>
             <TD>
                 <mat-form-field class="tab">
-                    <input matInput  type="text" placeholder="Name" #name [formControl]="formNameControl">
+                    <input matInput  type="text" placeholder="Character Name" #name [formControl]="formNameControl">
                 </mat-form-field>
 
                 <mat-form-field class="tab">
@@ -60,6 +83,10 @@
             <mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
         </ng-container>
 
+        <ng-container matColumnDef="character">
+            <mat-header-cell *matHeaderCellDef> Character </mat-header-cell>
+        </ng-container>
+
         <ng-container matColumnDef="result">
             <mat-header-cell *matHeaderCellDef> Result </mat-header-cell>
         </ng-container>
@@ -82,6 +109,10 @@
             <mat-cell *matCellDef="let tura"> {{tura.user}} </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="character">
+            <mat-cell *matCellDef="let tura"> {{tura.character}} </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="result">
             <mat-cell *matCellDef="let tura"> {{tura.roll}} </mat-cell>s
         </ng-container>
@@ -97,7 +128,7 @@
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
 </div>
-</div>
+
 <ng-template #emptyTableDiv>
     <div style="height: 3em; width:100%; background-color: gray;"></div>
 </ng-template>

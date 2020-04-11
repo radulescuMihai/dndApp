@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Turn } from './actiune.model'
 import { Dice } from './dice.model'
 import { DataSource } from "@angular/cdk/collections";
 import { Observable, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { GameService } from './game.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateCharacterDialogComponent } from './create-character-dialog.component';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-game',
@@ -13,7 +16,10 @@ import { GameService } from './game.service';
 })
 export class GameComponent implements OnInit {
 
-  displayedColumns: string[] = ['player', 'result', 'action', 'comment'];
+  // @Input() loggedUser:string;
+  // @Input() selectedChar:string;
+
+  displayedColumns: string[] = ['player', 'character', 'result', 'action', 'comment'];
   dataSource: GameDataSource;
 
   resultsList: Turn[] = [];
@@ -21,19 +27,27 @@ export class GameComponent implements OnInit {
   dices: Dice[] = [];
   selectedDices: Dice[] = [];
 
-  actionList: string[] = ['Attack', 'Cast Spell', 'Dodge', 'Saving Throw', 'Ability Check', 'Take Damege', 'Heal'];
+  actionList: string[] = ['Initiative','Attack', 'Cast Spell', 'Dodge', 'Saving Throw', 'Ability Check', 'Take Damege', 'Heal'];
 
   formNameControl = new FormControl();
   formActionControl = new FormControl();
   formCommentControl = new FormControl();
+  formCharControl = new FormControl();
 
-  constructor(private gameService: GameService) { }
+  characterList:any;
+  selectedChar: any;
+  
+  constructor(private gameService: GameService,
+    private userService:LoginService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.gameService.getAllTurns().subscribe(turnList => {
       this.resultsList = turnList;
       this.refresh();
     });
+
+    // this.formNameControl.setValue(this.selectedChar);
   }
 
   refresh() {
@@ -49,6 +63,20 @@ export class GameComponent implements OnInit {
     this.selectedDices.splice(nr, 1);
   }
 
+  newChar():void{
+    const dialogRef = this.dialog.open(CreateCharacterDialogComponent, {
+      width: '250px',
+      data: {name: null}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.selectedChar = result;
+      this.formNameControl.setValue(result);
+    });
+
+  }
+
   roll(): void {
     let rollResult: string = "";
     let roll: number = 0;
@@ -60,10 +88,11 @@ export class GameComponent implements OnInit {
     }
     rollResult += "Total: " + total;
     let turnResult = new Turn();
-    turnResult.user = this.formNameControl.value
+    turnResult.character = this.formNameControl.value
     turnResult.roll = rollResult;
     turnResult.action = this.formActionControl.value;
     turnResult.comment = this.formCommentControl.value
+    turnResult.user = this.userService.getLoggedUser().name;
 
     console.log("Sending turn tu backend...")
     this.gameService.create(turnResult).subscribe( turn =>{

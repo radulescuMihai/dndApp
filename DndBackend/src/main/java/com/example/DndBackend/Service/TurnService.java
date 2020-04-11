@@ -11,6 +11,6 @@ public interface TurnService {
 
 	public List<Turn> getTurns();
 
-	public void addUser(Turn turn);
+	public void addTurn(Turn turn);
 	
 }

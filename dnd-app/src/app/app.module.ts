@@ -12,9 +12,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GameService } from './game/game.service';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './game/login.component';
+import { CreateCharacterDialogComponent } from './game/create-character-dialog.component';
 
 @NgModule({
   exports: [
@@ -24,10 +27,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatInputModule,
     MatFormFieldModule,
+    MatDialogModule,
   ],
   declarations: [
     AppComponent,
-    GameComponent
+    GameComponent,
+    LoginComponent,
+    CreateCharacterDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatIconModule,
     MatFormFieldModule,
+    MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

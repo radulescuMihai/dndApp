@@ -14,6 +14,8 @@ public class Turn {
 	private int id;
 	@Column(name="user")
 	private String user;
+	@Column(name="character_name")
+	private String character;
 	@Column(name="roll")
 	private String roll;
 	@Column(name="action")
@@ -62,4 +64,13 @@ public class Turn {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public String getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(String character) {
+		this.character = character;
+	}
+	
 }

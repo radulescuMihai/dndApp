@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Create new character</h1>
+<div mat-dialog-content>
+  <p>Enter character name</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.name" placeholder="Character Name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Create</button>
+</div>
