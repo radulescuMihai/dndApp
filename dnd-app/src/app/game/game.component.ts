@@ -27,25 +27,27 @@ export class GameComponent implements OnInit {
   dices: Dice[] = [];
   selectedDices: Dice[] = [];
 
-  actionList: string[] = ['Initiative','Attack', 'Cast Spell', 'Dodge', 'Saving Throw', 'Ability Check', 'Take Damege', 'Heal'];
+  actionList: string[] = ['Initiative', 'Attack', 'Cast Spell', 'Dodge', 'Saving Throw', 'Ability Check', 'Take Damege', 'Heal'];
 
   formNameControl = new FormControl();
   formActionControl = new FormControl();
   formCommentControl = new FormControl();
   formCharControl = new FormControl();
 
-  characterList:any;
+  characterList: any;
   selectedChar: any;
-  
+
   constructor(private gameService: GameService,
-    private userService:LoginService,
+    private userService: LoginService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.gameService.getAllTurns().subscribe(turnList => {
-      this.resultsList = turnList;
-      this.refresh();
-    });
+    // this.gameService.getAllTurns().subscribe(turnList => {
+    //   this.resultsList = turnList;
+    //   this.refresh();
+    // });
+
+    this.reLoad();
 
     // this.formNameControl.setValue(this.selectedChar);
   }
@@ -63,10 +65,10 @@ export class GameComponent implements OnInit {
     this.selectedDices.splice(nr, 1);
   }
 
-  newChar():void{
+  newChar(): void {
     const dialogRef = this.dialog.open(CreateCharacterDialogComponent, {
       width: '250px',
-      data: {name: null}
+      data: { name: null }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -94,15 +96,12 @@ export class GameComponent implements OnInit {
     turnResult.comment = this.formCommentControl.value
     turnResult.user = this.userService.getLoggedUser().name;
 
-    console.log("Sending turn tu backend...")
-    this.gameService.create(turnResult).subscribe( turn =>{
-      console.log("Sent succesfully!")
 
-      this.resultsList.unshift(turn);
-      this.refresh();
+    this.gameService.create(turnResult).subscribe(turn => {
+      this.reLoad();
+      // this.resultsList.unshift(turn);
+      // this.refresh();
     })
-    // this.reLoad();
-   
 
   }
 
@@ -111,6 +110,12 @@ export class GameComponent implements OnInit {
       this.resultsList = turnList;
       this.refresh();
     });
+    // this.trackTurns();
+  }
+
+  trackTurns(){
+    console.log("Tracking...")
+    this.gameService.trackChanges().subscribe(response => this.reLoad()); 
   }
 
 }

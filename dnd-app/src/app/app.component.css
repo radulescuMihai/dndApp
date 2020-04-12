@@ -4,7 +4,7 @@ h1{
 
 .wrapper{
     width: 560px;
-    /* overflow-x: auto; */
+    overflow-x: hidden;
     margin-left: 30vw;
     margin-right: 15vw;
 }
