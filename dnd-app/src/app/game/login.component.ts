@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LoginService } from './login.service';
 import { User } from './User.model';
@@ -11,40 +11,37 @@ import { User } from './User.model';
 export class LoginComponent implements OnInit {
 
   formNewUserControl = new FormControl();
-  // formCharControl = new FormControl();
 
-  loggedUser: string;
+  @Output() loggedUser = new EventEmitter<User>();
+  username: string;
   characterList: string[];
   selectedChar: string;
 
-  constructor(private login: LoginService) { }
+  constructor(private loginServ: LoginService) { }
 
   ngOnInit(): void {
   }
 
   logIn(): void {
-    this.loggedUser = this.formNewUserControl.value;
-    this.login.authentificate(this.formNewUserControl.value)
+    this.username = this.formNewUserControl.value;
+    this.loginServ.authentificate(this.formNewUserControl.value)
       .subscribe(user => {
         if (user !== null) {
-          this.login.setLoggedUser(user);
-          this.loggedUser = user.name;
+          this.username = user.name;
           document.getElementById("login").style.display = "none";
           document.getElementById("welcome").style.display = "block";
-          document.getElementById("sesion").style.display = "block";
+          // document.getElementById("sesion").style.display = "block";
+          this.loggedUser.emit(user);
           return;
         }
+        
         alert("Invalid Username!");
       });
-
   }
 
   signUp(): void {
     let user = new User(this.formNewUserControl.value);
-    this.login.create(user).subscribe(resut => {
-      console.log("Recived:");
-      console.log(resut);
-    });
+    this.loginServ.create(user).subscribe(resut => {});
   }
 
   signOut(): void {
@@ -52,6 +49,8 @@ export class LoginComponent implements OnInit {
     document.getElementById("login").style.display = "block";
     document.getElementById("welcome").style.display = "none";
     document.getElementById("sesion").style.display = "none";
+    
+    this.loggedUser.emit(null);
   }
 
   newUser(): void {

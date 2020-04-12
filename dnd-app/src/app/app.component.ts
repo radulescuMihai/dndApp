@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from './game/User.model';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  loggedUser:User;
+
+  onLogIn(user:User):void{
+    this.loggedUser = user;
+  }
 }

@@ -24,12 +24,12 @@ public class UsersController {
 	private UserService usrServ;
 	
 	@GetMapping(value ="/user/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-	User checkUser(@PathVariable(name ="name") String name){
-		return usrServ.checkUser(name);
+	ResponseEntity<?> checkUser(@PathVariable(name ="name") String name){
+		return new ResponseEntity<User>(usrServ.checkUser(name), HttpStatus.OK);
 	}
 	
 	@PostMapping(value="/user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addTurn(@RequestBody User newUser){
+	public ResponseEntity<?> addUser(@RequestBody User newUser){
 		System.out.println("Server a primit comanda! Add user:" + newUser.getName());
 		usrServ.addUser(newUser);
 		return new ResponseEntity<User>( newUser, HttpStatus.OK);

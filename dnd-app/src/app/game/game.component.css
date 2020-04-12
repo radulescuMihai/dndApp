@@ -1,12 +1,14 @@
-/* #wrapper{
-    width: 560px;
-    margin-left: 15vw;
-    margin-right: 15vw;
-} */
+#controlTable{
+    display: none;
+}
 
 table {
     width: 95%;
   }
+
+mat-cell{
+    display: flow-root;
+}
 
 .dice {
     width: 30px;
@@ -14,7 +16,7 @@ table {
 }
 
 .horizontal {
-    width: 560px;
+    width: 800px;
     height: 70px;
     display: flex;
     background-color: lightgray;
@@ -23,14 +25,24 @@ table {
 
 .tab{
     width: 120px;
-    margin: 10px;;
+    margin: 10px;
 }
 
 .main-table{
-    width: 560px;
+    width: 800px;
 }
 
 .mat-column-result{
-    flex: 0 10%;
+    /* flex: 0 20%; */
     margin-right: 10px;
+}
+
+.mat-column-mod{
+    flex: 0 5%;
+    margin-right: 10px;
+}
+
+.mat-column-comment{
+    flex: 0 20%;
+    /* margin-right: 10px; */
 }

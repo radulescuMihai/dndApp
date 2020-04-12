@@ -20,9 +20,9 @@ public class CaracterServiceImpl implements CaracterService {
 	
 	@Override
 	public List<Caracter> getCharactersForUser(String user){
-
-		return charRepo.findAllByUser(user);
-//		return new ArrayList<Turn>();
+		List<Caracter> result = charRepo.findAllByUser(user);
+		System.out.println("User "+ user + " have " + result.size() + " characters");
+		return result;
 	}
 
 	@Override

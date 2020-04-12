@@ -29,7 +29,7 @@ public class CaracterController {
 
 	@GetMapping(value = caracterUrl + "/{user}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Caracter>> getCharactersForUser(@PathVariable(name ="user") String user){
-		System.out.println("Server a primit comanda: GET cars for " + user);
+		System.out.println("Server a primit comanda: GET chars for " + user);
 		return new ResponseEntity<List<Caracter>>(carServ.getCharactersForUser(user), HttpStatus.OK);
 	}
 	

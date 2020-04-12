@@ -3,12 +3,12 @@ h1{
 }
 
 .wrapper{
-    width: 560px;
+    width: 800px;
     /* overflow-x: auto; */
-    margin-left: 30vw;
+    margin-left: 25vw;
     margin-right: 15vw;
 }
 
 #sesion{
-    display: none;
+    display: block;
 }

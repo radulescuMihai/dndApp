@@ -1,6 +1,6 @@
 <table>
     <tr id="login">
-        <td>
+        <td  style="width: 250px;">
             <mat-form-field>
                 <input matInput type="text" placeholder="Username" [formControl]="formNewUserControl">
             </mat-form-field>
@@ -12,13 +12,13 @@
     </tr>
 
     <tr id="welcome">
-        <td>
-            <h2 style="width: 280px;">
-                Welcome: {{loggedUser}}
+        <td  style="width: 250px;">
+            <h2 >
+                Welcome: {{username}}
             </h2>
         </td>
-        <td style="width: 280px;">
-            <button mat-raised-button (click)="signOut()" style=" margin-left: 175px;">Sign Out!</button>
+        <td style="width: 250px;">
+            <button mat-raised-button (click)="signOut()" style=" margin-left: 130px;">Sign Out!</button>
         </td>
     </tr>
 

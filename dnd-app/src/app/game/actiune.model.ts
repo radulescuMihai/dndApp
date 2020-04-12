@@ -4,6 +4,8 @@ export class Turn{
     character:string;
     roll:string;
     action:string;
+    mod:number;
+    target:string;
     comment:string;
 
 }

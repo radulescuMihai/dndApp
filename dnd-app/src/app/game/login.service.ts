@@ -9,25 +9,12 @@ import { Character } from './character.model';
   providedIn: 'root'
 })
 export class LoginService {
-  private loggedUser:User;
-  private selectedChar:Character;
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   private acceptJsonHttpHeaders = new HttpHeaders({ 'Accept': 'application/json' });
   private logInUrl = 'http://86.126.16.228:8080/user';
   
   constructor(private httpClient: HttpClient) { }
-
-  getLoggedUser():User{
-    return this.loggedUser;
-  }
-  getloggedChar():Character{
-    return this.selectedChar;
-  }
-
-  setLoggedUser(user:User):void{
-    this.loggedUser = user;
-  }
 
   authentificate(username:string): Observable<User> {
     return this.httpClient.get(`${this.logInUrl}/${username}`,

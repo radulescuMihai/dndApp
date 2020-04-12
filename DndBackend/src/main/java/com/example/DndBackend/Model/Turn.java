@@ -12,14 +12,25 @@ public class Turn {
 	@Id
 	@Column(name="id")
 	private int id;
+	
 	@Column(name="user")
 	private String user;
+	
 	@Column(name="character_name")
 	private String character;
+	
 	@Column(name="roll")
 	private String roll;
+	
 	@Column(name="action")
 	private String action;
+	
+	@Column(name="target")
+	private String target;
+	
+	@Column(name="modifier")
+	private Integer mod;
+	
 	@Column(name="comment")
 	private String comment;
 	
@@ -71,6 +82,22 @@ public class Turn {
 
 	public void setCharacter(String character) {
 		this.character = character;
+	}
+
+	public String getTarget() {
+		return target;
+	}
+
+	public void setTarget(String target) {
+		this.target = target;
+	}
+
+	public Integer getMod() {
+		return mod;
+	}
+
+	public void setMod(Integer mod) {
+		this.mod = mod;
 	}
 	
 }

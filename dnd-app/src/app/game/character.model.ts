@@ -12,7 +12,7 @@ export class Character{
     hpDiceNr:number;
     hpDicesLeft:number;
 
-    user:User;
+    user:string;
     race:string;
     class:string;
     lvl:number;
