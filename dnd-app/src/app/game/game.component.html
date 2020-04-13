@@ -126,7 +126,7 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     </mat-table>
 
-    <div style="overflow-y:auto; height: 400px;">
+    <div style="overflow-y:auto; overflow-x:hidden; height: 400px;">
         <mat-table [dataSource]="dataSource" class="mat-elevation-z8 main-table"
             *ngIf=" resultsList && resultsList.length >0; else emptyTableDiv">
 
