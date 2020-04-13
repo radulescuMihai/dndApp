@@ -1,16 +1,12 @@
 package com.example.DndBackend.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.DndBackend.Model.Caracter;
-import com.example.DndBackend.Model.Turn;
 import com.example.DndBackend.Repository.CharacterRepository;
-import com.example.DndBackend.Repository.TurnRepository;
 
 @Service
 public class CaracterServiceImpl implements CaracterService {
