@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Create new character</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="caracter.name" placeholder="Character name" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="caracter.race" placeholder="Race">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="caracter.class" placeholder="Class">
+  </mat-form-field>
+  <mat-form-field style="width: 50px;">
+    <input matInput [(ngModel)]="caracter.lvl" placeholder="Level" type="number" min="0">
+  </mat-form-field>
+  <mat-form-field style="width: 50px;">
+    <input matInput [(ngModel)]="caracter.hp" placeholder="Max HP" type="number" min="0">
+  </mat-form-field>
+  <mat-form-field style="width: 50px;">
+    <input matInput [(ngModel)]="caracter.ac" placeholder="AC" type="number" min="0">
+  </mat-form-field>
+  <mat-form-field style="width: 100px;">
+    <input matInput [(ngModel)]="caracter.experience" placeholder="EXP" type="number" min="0">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="caracter" cdkFocusInitial>Create</button>
+</div>

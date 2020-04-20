@@ -13,11 +13,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatDividerModule} from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GameService } from './game/game.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './game/login.component';
 import { CreateCharacterDialogComponent } from './game/create-character-dialog.component';
+import { MultiplayerComponent } from './game/multiplayer.component';
+import { CreateHostDialogComponent } from './game/create-host-dialog.component';
+import { CreateMonsterDialogComponent } from './game/create-monster-dialog.component';
 
 @NgModule({
   exports: [
@@ -28,13 +32,18 @@ import { CreateCharacterDialogComponent } from './game/create-character-dialog.c
     MatInputModule,
     MatFormFieldModule,
     MatDialogModule,
+    MatDividerModule,
     CreateCharacterDialogComponent,
+    CreateHostDialogComponent,
   ],
   declarations: [
     AppComponent,
     GameComponent,
     LoginComponent,
-    CreateCharacterDialogComponent
+    CreateCharacterDialogComponent,
+    MultiplayerComponent,
+    CreateHostDialogComponent,
+    CreateMonsterDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +57,7 @@ import { CreateCharacterDialogComponent } from './game/create-character-dialog.c
     MatIconModule,
     MatFormFieldModule,
     MatDialogModule,
+    MatDividerModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -58,6 +68,7 @@ import { CreateCharacterDialogComponent } from './game/create-character-dialog.c
   bootstrap: [AppComponent],
   entryComponents: [
     CreateCharacterDialogComponent,
+    CreateHostDialogComponent,
   ]
 
 })

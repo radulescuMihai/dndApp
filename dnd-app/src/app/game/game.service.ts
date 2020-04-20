@@ -30,17 +30,17 @@ export class GameService {
         catchError(this.handleError));
   }
 
-  update(prefix: Turn): Observable<Turn> {
+  update(tura: Turn): Observable<Turn> {
     return this.httpClient
-      .put(`${this.backendUrl}`, JSON.stringify(prefix)
+      .put(`${this.backendUrl}`, JSON.stringify(tura)
         , { headers: this.httpHeaders })
       .pipe(
         map(response => response as Turn),
         catchError(this.handleError));
   }
 
-  delete(prefix: Turn): Observable<void> {
-    let url = this.backendUrl+"/"+prefix.id;
+  delete(tura: Turn): Observable<void> {
+    let url = this.backendUrl+"/"+tura.id;
     return this.httpClient.delete(`${url}`,
       { headers: this.httpHeaders })
       .pipe(

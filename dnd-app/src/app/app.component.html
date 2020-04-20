@@ -1,8 +1,8 @@
-<h1> D&D</h1>
 <div class="wrapper">
+    <h1 style="text-align: center;">  D&D (closed Alpha)</h1>
     <app-login (loggedUser) = onLogIn($event)></app-login>
-    <div id="sesion" *ngIf = "loggedUser">
-        <app-game [loggedUser] = "loggedUser"></app-game>
+    <div *ngIf = "loggedUser">
+        <app-multiplayer [loggedUser] = "loggedUser" ></app-multiplayer>
     </div>
 
 </div>

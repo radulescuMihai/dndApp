@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Create new character</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="name" placeholder="Campaign name" required>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="name" cdkFocusInitial>Host game</button>
+</div>

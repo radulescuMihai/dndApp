@@ -1,0 +1,96 @@
+<div *ngIf="!selectedHost">
+    <table>
+        <tr>
+            <td style="width: 250px;">
+                <mat-form-field>
+                    <mat-select placeholder="Select Character" [formControl]="formCharControl">
+                        <mat-option *ngIf="!characterList">
+                            No characters
+                        </mat-option>
+                        <mat-option *ngFor="let char of characterList" [value]="char.name" (click)="onCharSelect(char)">
+                            {{char.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </td>
+
+            <td>
+                <button mat-raised-button style="margin-left: 130px;" (click)="newChar()">
+                    New character
+                </button>
+            </td>
+        </tr>
+    </table>
+
+    <mat-table [dataSource]="[]" class="mat-elevation-z4 main-table">
+
+        <ng-container matColumnDef="player">
+            <mat-header-cell *matHeaderCellDef> DM </mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="campaign">
+            <mat-header-cell *matHeaderCellDef> Campaign Name </mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="join">
+            <mat-header-cell *matHeaderCellDef>
+                <button mat-raised-button (click)="refreshHostList()">
+                    <mat-icon>refresh</mat-icon>
+                </button>
+                <button mat-raised-button style="margin-left: 50px;" (click)="createHost()">Host Game</button>
+            </mat-header-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    </mat-table>
+
+    <div style="overflow-y:auto; overflow-x:hidden;"  class="mat-elevation-z4 main-table">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8 main-table"
+            *ngIf=" sesionList && sesionList.length >0; else emptyTableDiv">
+
+            <ng-container matColumnDef="player">
+                <mat-cell *matCellDef="let sesion"> {{sesion.hostName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="campaign">
+                <mat-cell *matCellDef="let sesion"> {{sesion.campaignName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="join">
+                <mat-cell *matCellDef="let sesion">
+                    <button mat-raised-button (click)="join(sesion)">Join</button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+    </div>
+</div>
+
+<div *ngIf="selectedHost">
+    <button mat-raised-button (click)="reLoad()">
+        <mat-icon>refresh</mat-icon>
+    </button>
+
+    <button mat-raised-button (click)="leaveGame()" style=" float: right;"> Leave Game</button>
+
+    <p style="text-align: center; font-size: large;">Connected Players:</p>
+    <div id ="playerList"> 
+        <ng-container *ngFor="let player of playerList">
+            <mat-card class="mat-elevation-z4 dice" (click)="showDet(player)">
+                <mat-card-content>{{player.user}}</mat-card-content>
+                <!-- <mat-card-header>
+                    <mat-card-title>{{player.user}}</mat-card-title>
+                    <mat-card-subtitle>>{{player.name}}</mat-card-subtitle>
+                </mat-card-header> -->
+            </mat-card>
+        </ng-container>
+    </div>
+
+    <mat-divider style="margin: 10px 0;"></mat-divider>
+    <app-game [loggedUser]="loggedUser" [isGM]="isGM" [selectedHost]="selectedHost" [selectedChar]="selectedChar"></app-game>
+</div>
+
+<ng-template #emptyTableDiv>
+    <div style="height: 3em; width:100%; background-color: gray;"></div>
+</ng-template>

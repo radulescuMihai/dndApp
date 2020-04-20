@@ -1,16 +1,14 @@
-<table id="selChar">
+  
+<div *ngIf="isGM">
+<table>
     <tr>
-        <!-- <td>
-            Select Character
-        </td> -->
-
         <td style="width: 250px;">
             <mat-form-field>
                 <mat-select placeholder="Select Character" [formControl]="formCharControl">
-                    <mat-option *ngIf = "!characterList" >
+                    <mat-option *ngIf="!characterList">
                         No characters
                     </mat-option>
-                    <mat-option *ngFor="let char of characterList" [value]="char.name" (click) = "onCharSelect(char)">
+                    <mat-option *ngFor="let char of characterList" [value]="char.name" (click)="onCharSelect(char)">
                         {{char.name}}
                     </mat-option>
                 </mat-select>
@@ -25,145 +23,164 @@
         </td>
     </tr>
 </table>
+</div>
+<table>
+    <TR>
+        <TD>
+            <button mat-raised-button (click)="addDice(4);">d4</button>
+            <button mat-raised-button (click)="addDice(6);">d6</button>
+            <button mat-raised-button (click)="addDice(8);">d8</button>
+            <button mat-raised-button (click)="addDice(10);">d10</button>
+            <button mat-raised-button (click)="addDice(12);">d12</button>
+            <button mat-raised-button (click)="addDice(20);">d20</button>
+            <button mat-raised-button (click)="addDice(100);">d100</button>
+        </TD>
+    </TR>
+    <TR>
+        <TD>
+            <div class="horizontal">
+                <ng-container *ngFor="let dice of selectedDices; let i = index">
+                    <mat-card class="mat-elevation-z4 dice" (click)="deleteDice(i)">
+                        {{dice.title}}
+                        <!-- <mat-card-header>
+                            <mat-card-title>{{dice.title}}</mat-card-title>
+                        </mat-card-header> -->
+                        <!-- <img mat-card-image src="{{dice.image}}" alt="{{dice.title}}"> -->
+                    </mat-card>
+                </ng-container>
+            </div>
+        </TD>
+    </TR>
 
-<div id="controlTable">
-    <table>
-        <TR>
-            <TD style="text-align-last: center;"> D&D (closed alpha)
-            </TD>
-        </TR>
-        <TR>
-            <TD>
-                <button mat-raised-button (click)="addDice(4);">d4</button>
-                <button mat-raised-button (click)="addDice(6);">d6</button>
-                <button mat-raised-button (click)="addDice(8);">d8</button>
-                <button mat-raised-button (click)="addDice(10);">d10</button>
-                <button mat-raised-button (click)="addDice(12);">d12</button>
-                <button mat-raised-button (click)="addDice(20);">d20</button>
-                <button mat-raised-button (click)="addDice(100);">d100</button>
-            </TD>
-        </TR>
-        <TR>
-            <TD>
-                <div class="horizontal">
-                    <ng-container *ngFor="let dice of selectedDices; let i = index">
-                        <mat-card class="mat-elevation-z4 dice" (click)="deleteDice(i)">
-                            <mat-card-header>
-                                <mat-card-title>{{dice.title}}</mat-card-title>
-                            </mat-card-header>
-                            <!-- <img mat-card-image src="{{dice.image}}" alt="{{dice.title}}"> -->
-                        </mat-card>
-                    </ng-container>
-                </div>
-            </TD>
-        </TR>
+    <TR>
+        <TD>
+            <mat-form-field class="tab">
+                <input matInput type="text" [disabled]= "!isGM" placeholder="Character Name" #name [formControl]="formCharNameControl">
+            </mat-form-field>
 
-        <TR>
-            <TD>
-                <mat-form-field class="tab">
-                    <input matInput type="text" placeholder="Character Name" #name [formControl]="formCharNameControl">
-                </mat-form-field>
+            <mat-form-field class="tab">
+                <mat-select placeholder="Select Action" [formControl]="formActionControl">
+                    <mat-option *ngFor="let action of actionList" [value]="action">
+                        {{action}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
-                <mat-form-field class="tab">
-                    <mat-select placeholder="Select Action" [formControl]="formActionControl">
-                        <mat-option *ngFor="let action of actionList" [value]="action">
-                            {{action}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+            <mat-form-field class="tab">
+                <input matInput type="text" placeholder="Target" [formControl]="formTargetControl">
+                <!-- <mat-select placeholder="Target" [formControl]="formTargetControl"> -->
+                    <!-- <mat-option *ngFor="let target of targetList" [value]="target.name" (click)="selectTarget(target)">
+                        {{target.name}}
+                    </mat-option>
+                    <mat-option *ngIf="isGM" (click)="addNPC()">
+                        Add NPC
+                    </mat-option> -->
+                <!-- </mat-select> -->
+            </mat-form-field>
 
-                <mat-form-field class="tab">
-                    <input matInput type="text" placeholder="Target" [formControl]="formTargetControl">
-                </mat-form-field>
+            <mat-form-field style="width: 50px; margin-right: 10px;">
+                <input matInput type="number" placeholder="Mod" [formControl]="formModControl">
+            </mat-form-field>
 
-                <mat-form-field style="width: 50px; margin-right: 10px;">
-                    <input matInput type="number" placeholder="Mod" [formControl]="formModControl">
-                </mat-form-field>
+            <mat-form-field class="tab">
+                <input matInput type="text" placeholder="Comment" [formControl]="formCommentControl">
+            </mat-form-field>
 
-                <mat-form-field class="tab">
-                    <input matInput type="text" placeholder="Comment" [formControl]="formCommentControl">
-                </mat-form-field>
+            <button mat-raised-button (click)="roll()">ROLL!</button>
 
-                <button mat-raised-button (click)="roll()">ROLL!</button>
+            <button mat-raised-button (click)="reLoad()">
+                <mat-icon>refresh</mat-icon>
+            </button>
+        </TD>
+    </TR>
+</table>
 
-                <button mat-raised-button (click)="reLoad()">
-                    <mat-icon>refresh</mat-icon>
-                </button>
-            </TD>
-        </TR>
-    </table>
+<mat-table [dataSource]="[]" class="mat-elevation-z4 main-table">
 
-    <mat-table [dataSource]="[]" class="mat-elevation-z4 main-table">
+    <ng-container matColumnDef="player">
+        <mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="character">
+        <mat-header-cell *matHeaderCellDef> Character </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="target">
+        <mat-header-cell *matHeaderCellDef> Target </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="result">
+        <mat-header-cell *matHeaderCellDef> Result </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="mod">
+        <mat-header-cell *matHeaderCellDef> Mod </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="comment">
+        <mat-header-cell *matHeaderCellDef> Comment </mat-header-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="buttons">
+        <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+</mat-table>
+
+<div class="mat-elevation-z4 main-table" style="overflow-y:auto; overflow-x:hidden; height: 400px;">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8 main-table"
+        *ngIf=" resultsList && resultsList.length >0; else emptyTableDiv">
 
         <ng-container matColumnDef="player">
-            <mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
+            <mat-cell *matCellDef="let tura"> {{tura.user}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="character">
-            <mat-header-cell *matHeaderCellDef> Character </mat-header-cell>
+            <mat-cell *matCellDef="let tura"> {{tura.character}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="action">
-            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+            <mat-cell *matCellDef="let tura"> {{tura.action}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="target">
-            <mat-header-cell *matHeaderCellDef> Target </mat-header-cell>
+            <mat-cell *matCellDef="let tura"> {{tura.target}} </mat-cell>s
         </ng-container>
 
         <ng-container matColumnDef="result">
-            <mat-header-cell *matHeaderCellDef> Result </mat-header-cell>
+            <mat-cell *matCellDef="let tura">
+                <p *ngFor="let rolledDice of tura.roll.split('\n')">{{rolledDice}}</p>
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="mod">
-            <mat-header-cell *matHeaderCellDef> Mod </mat-header-cell>
+            <mat-cell *matCellDef="let tura"> {{tura.mod}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="comment">
-            <mat-header-cell *matHeaderCellDef> Comment </mat-header-cell>
+            <mat-cell *matCellDef="let tura"> {{tura.comment}} </mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <ng-container matColumnDef="buttons">
+            <mat-cell *matCellDef="let tura"> 
+                <button mat-raised-button (click)="apply(tura)" [disabled] = "tura.total == null || tura.targetChar == null">
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button mat-raised-button (click)="delete(tura)" [disabled] = "tura.total == null || tura.targetChar == null">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
-
-    <div style="overflow-y:auto; overflow-x:hidden; height: 400px;">
-        <mat-table [dataSource]="dataSource" class="mat-elevation-z8 main-table"
-            *ngIf=" resultsList && resultsList.length >0; else emptyTableDiv">
-
-            <ng-container matColumnDef="player">
-                <mat-cell *matCellDef="let tura"> {{tura.user}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="character">
-                <mat-cell *matCellDef="let tura"> {{tura.character}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="action">
-                <mat-cell *matCellDef="let tura"> {{tura.action}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="target">
-                <mat-cell *matCellDef="let tura"> {{tura.target}} </mat-cell>s
-            </ng-container>
-
-            <ng-container matColumnDef="result">
-                <mat-cell *matCellDef="let tura"> 
-                    <p *ngFor="let rolledDice of tura.roll.split('\n')">{{rolledDice}}</p> 
-                </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="mod">
-                <mat-cell *matCellDef="let tura"> {{tura.mod}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="comment">
-                <mat-cell *matCellDef="let tura"> {{tura.comment}} </mat-cell>
-            </ng-container>
-
-            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-        </mat-table>
-    </div>
 </div>
+
 
 <ng-template #emptyTableDiv>
     <div style="height: 3em; width:100%; background-color: gray;"></div>

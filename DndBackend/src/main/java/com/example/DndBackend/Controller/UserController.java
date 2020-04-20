@@ -16,7 +16,7 @@ import com.example.DndBackend.Service.UserService;
 
 @CrossOrigin(origins = "http://86.126.16.228:4200", maxAge = 3600)
 @RestController
-public class UsersController {
+public class UserController {
 
 	@Autowired
 	private UserService usrServ;

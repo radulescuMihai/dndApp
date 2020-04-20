@@ -59,6 +59,13 @@ public class Caracter {
 	private Integer experience;
 	
 	public Caracter() {}
+	
+	@Override
+	public boolean equals(Object c) {
+		return c instanceof Caracter && 
+				this.user.equals(((Caracter)c).getUser())  &&
+				this.name.equals(((Caracter)c).getName());
+	}
 
 	public String getName() {
 		return name;

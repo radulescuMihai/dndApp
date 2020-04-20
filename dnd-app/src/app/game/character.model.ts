@@ -1,4 +1,5 @@
 import { User } from './user.model';
+import { Stats } from 'fs';
 
 export class Character{
     name:string;
@@ -18,5 +19,6 @@ export class Character{
     lvl:number;
     aligment:string;
     experience:number;
+    stats:Stats;
 
 }

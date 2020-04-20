@@ -11,13 +11,16 @@ mat-cell{
 }
 
 .dice {
-    width: 30px;
-    height: 30px;
+    font-size: large;
+    font-weight: 500;
+    width: 15px;
+    height: 15px;
+    margin-right: 2px;
 }
 
 .horizontal {
     width: 800px;
-    height: 70px;
+    height: 55px;
     display: flex;
     background-color: lightgray;
     /* justify-content: space-between; */

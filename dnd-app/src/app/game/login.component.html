@@ -1,6 +1,7 @@
+<div *ngIf="!loggedIn">
 <table>
-    <tr id="login">
-        <td  style="width: 250px;">
+    <tr>
+        <td style="width: 250px;">
             <mat-form-field>
                 <input matInput type="text" placeholder="Username" [formControl]="formNewUserControl">
             </mat-form-field>
@@ -11,15 +12,11 @@
         </td>
     </tr>
 
-    <tr id="welcome">
-        <td  style="width: 250px;">
-            <h2 >
-                Welcome: {{username}}
-            </h2>
-        </td>
-        <td style="width: 250px;">
-            <button mat-raised-button (click)="signOut()" style=" margin-left: 130px;">Sign Out!</button>
-        </td>
-    </tr>
-
 </table>
+</div>
+<div *ngIf="loggedIn">
+    <button mat-raised-button (click)="signOut()" style=" float: right;">Sign Out!</button>
+    <h2 style="text-align: center;">
+        Welcome: {{username}}
+    </h2>
+</div>

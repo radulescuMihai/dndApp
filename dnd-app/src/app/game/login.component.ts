@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   username: string;
   characterList: string[];
   selectedChar: string;
+  loggedIn:boolean;
 
   constructor(private loginServ: LoginService) { }
 
@@ -28,10 +29,11 @@ export class LoginComponent implements OnInit {
       .subscribe(user => {
         if (user !== null) {
           this.username = user.name;
-          document.getElementById("login").style.display = "none";
-          document.getElementById("welcome").style.display = "block";
+          // document.getElementById("login").style.display = "none";
+          // document.getElementById("welcome").style.display = "block";
           // document.getElementById("sesion").style.display = "block";
           this.loggedUser.emit(user);
+          this.loggedIn = true;
           return;
         }
         
@@ -46,10 +48,9 @@ export class LoginComponent implements OnInit {
 
   signOut(): void {
     this.formNewUserControl.reset();
-    document.getElementById("login").style.display = "block";
-    document.getElementById("welcome").style.display = "none";
-    document.getElementById("sesion").style.display = "none";
-    
+    // document.getElementById("login").style.display = "block";
+    // document.getElementById("sesion").style.display = "none";
+    this.loggedIn = false;
     this.loggedUser.emit(null);
   }
 
