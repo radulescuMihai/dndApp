@@ -14,7 +14,7 @@ export class CharacterService {
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   private acceptJsonHttpHeaders = new HttpHeaders({ 'Accept': 'application/json' });
-  private backendUrl = 'http://86.126.16.228:8080/char';
+  private backendUrl = 'http://86.121.209.212:8080/char';
   
   constructor(private httpClient: HttpClient) { }
 
