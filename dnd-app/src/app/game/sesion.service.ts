@@ -13,7 +13,7 @@ export class SesionService {
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   private acceptJsonHttpHeaders = new HttpHeaders({ 'Accept': 'application/json' });
-  private sessionUrl = 'http://86.126.16.228:8080/sesion';
+  private sessionUrl = 'http://86.121.209.212:8080/sesion';
   
   constructor(private httpClient: HttpClient) { }
 

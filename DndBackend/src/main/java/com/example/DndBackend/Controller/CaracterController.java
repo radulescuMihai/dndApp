@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import com.example.DndBackend.Model.Caracter;
 import com.example.DndBackend.Service.CaracterService;
 
-@CrossOrigin(origins = "http://86.126.16.228:4200", maxAge = 3600)
+@CrossOrigin(origins = "http://86.121.209.212:4200", maxAge = 3600)
 @RestController
 public class CaracterController {
 	

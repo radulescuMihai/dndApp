@@ -12,11 +12,25 @@ export class LoginService {
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   private acceptJsonHttpHeaders = new HttpHeaders({ 'Accept': 'application/json' });
-  private logInUrl = 'http://86.126.16.228:8080/user';
+  private logInUrl = 'http://86.121.209.212:8080/user';
+  public backendIP="";
   
   constructor(private httpClient: HttpClient) { }
 
+  getIP(): Observable<any> {
+    return this.httpClient.get(`https://www.cloudflare.com/cdn-cgi/trace`,
+      { headers: this.acceptJsonHttpHeaders })
+      .pipe(
+        map(response => response as any),
+        catchError(this.handleError));
+  }
+
   authentificate(username:string): Observable<User> {
+    // this.getIP().subscribe( result => {
+    //   this.backendIP = result.ip;
+    //   console.log(this.backendIP);
+    //   this.logInUrl = this.backendIP + this.logInUrl;
+    // });
     return this.httpClient.get(`${this.logInUrl}/${username}`,
       { headers: this.acceptJsonHttpHeaders })
       .pipe(

@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import com.example.DndBackend.Model.Turn;
 import com.example.DndBackend.Service.TurnService;
 
-@CrossOrigin(origins = "http://86.126.16.228:4200", maxAge = 3600)
+@CrossOrigin(origins = "http://86.121.209.212:4200", maxAge = 3600)
 @RestController
 public class TurnController {
 	
@@ -37,13 +37,13 @@ public class TurnController {
 		return new ResponseEntity<Turn>( newTurn, HttpStatus.OK);
 	}
 
-	@PutMapping(value="/{id}")
-	public void updateTurn(){
-	}
-
-	@DeleteMapping(value="/{id}")
-	public void deleteTurn(){
-		
-	}
+//	@PutMapping(value="/{id}")
+//	public void updateTurn(){
+//	}
+//
+//	@DeleteMapping(value="/{id}")
+//	public void deleteTurn(){
+//		
+//	}
 
 }
