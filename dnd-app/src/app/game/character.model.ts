@@ -1,5 +1,5 @@
-import { User } from './user.model';
-import { Stats } from 'fs';
+
+import { Stats } from './stats.model';
 
 export class Character{
     name:string;
